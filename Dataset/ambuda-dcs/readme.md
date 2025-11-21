@@ -1,5 +1,7 @@
 # ambuda-dcs
 
+https://github.com/ambuda-org/dcs/
+
 Sanitized parse data from the **Digital Corpus of Sanskrit (DCS)**, extracted and lightly corrected for use in the [Ambuda](https://ambuda.org) project and downstream Sanskrit NLP.
 
 > Source: Oliver Hellwig, *Digital Corpus of Sanskrit (DCS)*, 2010–2021.  
