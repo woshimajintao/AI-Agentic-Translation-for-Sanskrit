@@ -3,6 +3,11 @@
 EDA初步数据探索：
 https://colab.research.google.com/drive/1SUnIbyEYOYf7zD-yYq8i0GDouECWW2a0#scrollTo=xLNmlK641F6j
 
+推荐的python处理库：indic_transliteration和 Vidyut特别是其中的vidyut-cheda，vidyut-kosha，vidyut-sandhi，vidyut-lipi
+
+https://github.com/ambuda-org/vidyut/tree/main
+
+
 AI Agent 的 pipeline是成这样的：
 
 输入：一条新的梵文 shloka（Devanagari / IAST / SLP1 都行，先统一成 SLP1）
