@@ -9,7 +9,7 @@ import zipfile
 from pathlib import Path
 import sacrebleu
 
-# 路径设置
+
 PROJECT_ROOT = Path(__file__).parent.parent.parent
 sys.path.append(str(PROJECT_ROOT))
 DATA_DIR = PROJECT_ROOT / "data"
@@ -27,7 +27,7 @@ def load_engine():
     return llm, agent
 
 def clean_baseline_output(text: str) -> str:
-    """前端清洗函数，用于 Baseline 输出"""
+
     if not text: return ""
     patterns = [r'^(Here is|The translation|The meaning|Output).*?:', r'^Translation:', r'^Answer:']
     cleaned = text
@@ -36,27 +36,24 @@ def clean_baseline_output(text: str) -> str:
     return cleaned.strip().strip('"').strip("'").strip()
 
 def get_similar_examples(src_text: str, dataset_name: str, exclude_id: int, k: int = 3, search_min_id: int = -1, search_max_id: int = 999999999) -> str:
-    """
-    [Core RAG Logic]
-    检索相似例句。参数 search_min_id 和 search_max_id 用于实现物理切分。
-    """
+    
     con = get_db_connection()
     try:
         query = """
             SELECT src_text, tgt_text, jaccard(src_text, ?) as similarity
             FROM dataset_items
             WHERE dataset_name = ? 
-              AND item_id != ?        -- 排除自身 (ID)
-              AND src_text != ?       -- 排除自身 (内容)
-              AND item_id >= ?        -- 最小 ID 限制 (用于切分)
-              AND item_id <= ?        -- 最大 ID 限制 (用于切分)
+              AND item_id != ?        
+              AND src_text != ?       
+              AND item_id >= ?        
+              AND item_id <= ?        
             ORDER BY similarity DESC
             LIMIT ?
         """
         results = con.execute(query, [src_text, dataset_name, exclude_id, src_text, search_min_id, search_max_id, k]).fetchall()
         
         if not results: return None
-        valid_examples = [r for r in results if r[2] > 0.1] # 过滤低相似度
+        valid_examples = [r for r in results if r[2] > 0.1] 
         if not valid_examples: return None
             
         builder = []
@@ -72,7 +69,6 @@ def get_similar_examples(src_text: str, dataset_name: str, exclude_id: int, k: i
     finally:
         con.close()
 
-# 辅助函数：创建 ZIP 下载流
 def create_pair_zip(data_items):
     """
     data_items: list of (id, src, tgt) tuples
@@ -90,7 +86,7 @@ def create_pair_zip(data_items):
 
 try:
     llm, agent = load_engine()
-    glossary_tool = GlossaryLookupTool() # 独立实例用于 Mode G
+    glossary_tool = GlossaryLookupTool() 
     st.sidebar.success("✅ Model Loaded")
 except Exception as e:
     st.sidebar.error(f"❌ Model Load Failed: {e}")
@@ -187,7 +183,6 @@ with tab1:
         if not glossary_dir.exists():
             st.error(f"Directory not found: {glossary_dir}")
         else:
-            # 优先找 CSV
             csv_file = glossary_dir / "sanskrit_glossary.csv"
             jsonl_file = glossary_dir / "sanskrit_glossary.jsonl"
             
@@ -203,21 +198,17 @@ with tab1:
                     df = pd.read_json(jsonl_file, lines=True)
                 
                 if df is not None:
-                    # 检查列名
                     required_cols = {"term", "definition"}
                     if not required_cols.issubset(df.columns):
                         st.error(f"File missing required columns: {required_cols}. Found: {df.columns.tolist()}")
                     else:
-                        # 准备入库
                         con = get_db_connection()
                         con.execute("CREATE TABLE IF NOT EXISTS glossary (term VARCHAR, definition VARCHAR, source VARCHAR, page INTEGER)")
-                        con.execute("DELETE FROM glossary") # 覆盖模式
+                        con.execute("DELETE FROM glossary") 
                         
-                        # 确保有 source 和 page 列
                         if "source" not in df.columns: df["source"] = "Unknown"
                         if "page" not in df.columns: df["page"] = 0
                         
-                        # 转换为 tuple list
                         data_to_insert = []
                         for _, row in df.iterrows():
                             data_to_insert.append((
@@ -239,7 +230,7 @@ with tab1:
                 st.error(f"Error loading glossary: {e}")
 
 # =========================================================
-# Tab 2: Run Evaluation (修复后的 UI 逻辑 + 锁功能 + 下载)
+# Tab 2: Run Evaluation 
 # =========================================================
 with tab2:
     st.header("Run Evaluation Task")
@@ -299,7 +290,6 @@ with tab2:
             sampling_method = st.radio("Selection", ["First N Items", "Random N Items"], horizontal=True)
             limit = st.slider("Test Sample Size (N)", 1, 200, 5)
             
-            # 随机种子控制
             if sampling_method == "Random N Items":
                 if "random_seed" not in st.session_state: st.session_state.random_seed = 42
                 
@@ -335,7 +325,6 @@ with tab2:
         if not selected_dataset: st.warning("Please select a dataset."); st.stop()
         
         con = get_db_connection()
-        # 必须按 ID 排序，保证切分一致性
         all_items = con.execute("SELECT item_id, src_text, tgt_text FROM dataset_items WHERE dataset_name = ? ORDER BY item_id", [selected_dataset]).fetchall()
         con.close()
         
@@ -378,12 +367,9 @@ with tab2:
                 if sampling_method == "First N Items":
                     final_test_items = test_universe[:limit]
                 else:
-                    # 【核心】在这里应用 Seed
                     random.seed(st.session_state.random_seed)
                     final_test_items = random.sample(test_universe, limit)
         
-        # 将选中的测试集保存到 session_state，供后续下载使用
-        # 格式：[(id, src, tgt)]
         st.session_state['last_test_set'] = final_test_items
         st.session_state['last_test_seed'] = st.session_state.random_seed if sampling_method == "Random N Items" else "FirstN"
 
@@ -393,7 +379,7 @@ with tab2:
             test_ids = {item[0] for item in final_test_items}
             candidates = [item for item in search_universe if item[0] not in test_ids]
             if len(candidates) >= n_examples:
-                random.seed(st.session_state.random_seed) # 同样应用种子
+                random.seed(st.session_state.random_seed) 
                 chosen = random.sample(candidates, n_examples)
                 static_few_shot_text = "\n\n".join([f"Source: {ex[1].strip()}\nTarget: {ex[2].strip()}" for ex in chosen])
             else:
