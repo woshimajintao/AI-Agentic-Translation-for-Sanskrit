@@ -23,6 +23,7 @@ The agent adopts a *draft → evidence → revision* strategy inspired by human 
 
 ## Tool Design
 
+
 Each external linguistic resource is exposed to the agent as a **callable tool with a fixed input–output interface**:
 
 - **Monier–Williams Dictionary**: provides lexical evidence at the lemma level  
@@ -32,7 +33,7 @@ Each external linguistic resource is exposed to the agent as a **callable tool w
 
 All tool outputs and execution metadata are stored in **DuckDB** to support reproducibility and post-hoc analysis.
 
-Our tool demonstration videos are available here:  
+Our tool demonstration videos are available [here](https://drive.google.com/drive/folders/1EcTHzdfSpEpe64GI08cjwHYctkv1QAOB?usp=sharing):  
 [![Demo Videos](Scripts/ui.png)](https://drive.google.com/drive/folders/1EcTHzdfSpEpe64GI08cjwHYctkv1QAOB?usp=sharing)
 
 
