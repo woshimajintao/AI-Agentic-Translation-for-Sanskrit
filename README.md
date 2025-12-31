@@ -37,7 +37,7 @@ The project accompanies an academic study on low-resource, morphologically rich 
 
 The system follows a **draft–evidence–revision** paradigm inspired by human translation practice:
 
-1. *(Optional)* Retrieve glossary constraints and similar examples  
+1. Retrieve glossary constraints and similar examples  
 2. Generate a draft translation with a frozen LLM  
 3. Acquire linguistic evidence via dictionary and morphology tools  
 4. Compress raw tool outputs into structured summaries  
