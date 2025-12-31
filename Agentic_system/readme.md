@@ -47,3 +47,20 @@ The project is organized to separate the UI (Streamlit), Data Layer, and Core Lo
 - Editor: VS Code (Recommended)
 
 - Git: For cloning the repository
+
+## 🚀 Quick Start Guide
+
+Download and Open the Agentic_system project folder in VS Code, open the terminal (Ctrl + ~), and follow these steps.
+
+### Step 1: Create & Activate Virtual Environment
+
+Always use a virtual environment to keep dependencies isolated.
+
+```text
+# 1. Create venv
+python3 -m venv venv
+
+# 2. Activate venv
+source venv/bin/activate
+
+
