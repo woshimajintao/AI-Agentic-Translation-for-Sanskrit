@@ -52,11 +52,32 @@ This process improves faithfulness and robustness without any parameter updates.
 
 ## Repository Structure
 
-
----
-
-## Repository Structure
-
+.
+├── Agentic_system/
+│ Core implementation of the agentic translation framework, including
+│ the orchestration logic, tool interfaces, prompt templates, and
+│ DuckDB-based storage and logging.
+│
+├── gpt_eval/
+│ Evaluation code for general-purpose GPT models, used as strong
+│ off-the-shelf baselines for Sanskrit–English translation.
+│
+├── Sanskrit-specific_MT_eval/
+│ Evaluation code for Sanskrit-specific machine translation systems,
+│ including M2M100 and IndicTrans2.
+│
+├── Scripts/
+│ Utility scripts for data preprocessing, analysis, and visualization
+│ (e.g., glossary processing, result aggregation, plotting).
+│
+├── Dataset/
+│ Linguistic resources and evaluation data, including:
+│ - test sets for Sanskrit–English translation
+│ - Monier–Williams Sanskrit–English dictionary data
+│ - Ambuda-DCS morphological and grammatical resources
+│ - curated glossary constraints
+│
+└── README.md
 
 ---
 
