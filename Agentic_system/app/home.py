@@ -2,7 +2,6 @@ import streamlit as st
 from pathlib import Path
 import os
 
-# 设置页面配置
 st.set_page_config(
     page_title="Sanskrit Agent System",
     page_icon="🕉️",
@@ -10,11 +9,9 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# 路径设置
 PROJECT_ROOT = Path(__file__).parent.parent
 ASSETS_DIR = PROJECT_ROOT / "assets"
 
-# 确保 assets 目录存在
 if not ASSETS_DIR.exists():
     os.makedirs(ASSETS_DIR, exist_ok=True)
 
@@ -67,7 +64,6 @@ with col_img:
     if img_path.exists():
         st.image(str(img_path), caption="Agentic Workflow Diagram", use_container_width=True)
     else:
-        # 如果没有图片，提供上传框方便调试
         st.warning("⚠️ Architecture image not found.")
         st.info(f"Please save your diagram as: `{img_path}`")
         
