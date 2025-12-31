@@ -13,7 +13,6 @@ from PyQt6.QtWidgets import (
 from PyQt6.QtCore import Qt, QTimer, QPointF, QSize
 from PyQt6.QtGui import QIcon, QPixmap, QPainter, QColor, QPen
 
-# [cite_start]显式导入 ui_components 模块 [cite: 2]
 from ui_components import MainWindowUI, RightPanel, DynamicSingleLabelGroup, DynamicMultiLabelGroup, LeftPanel, SUPPORTED_EXTENSIONS 
 
 # --- PyInstaller Path Resolver ---
