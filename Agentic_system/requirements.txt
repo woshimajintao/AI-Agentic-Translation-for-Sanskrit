@@ -1,0 +1,8 @@
+streamlit
+duckdb
+pandas
+numpy
+llama-cpp-python
+sacrebleu
+indic-transliteration
+huggingface_hub
