@@ -38,3 +38,12 @@ The project is organized to separate the UI (Streamlit), Data Layer, and Core Lo
 │       └── morph_lookup.py  # 🧩 Tool: Morphological Segmentation & Analysis
 ├── requirements.txt         # 📦 Python Dependencies
 └── README.md                # 📄 Project Documentation
+
+
+
+## ✅ Prerequisites
+- Python: 3.10 or 3.11
+
+- Editor: VS Code (Recommended)
+
+- Git: For cloning the repository
