@@ -52,6 +52,8 @@ This process improves faithfulness and robustness without any parameter updates.
 
 ## Repository Structure
 
+```text
+
 .
 ├── Agentic_system/
 │ Core implementation of the agentic translation framework, including
@@ -78,6 +80,7 @@ This process improves faithfulness and robustness without any parameter updates.
 │ - curated glossary constraints
 │
 └── README.md
+```
 
 ---
 
