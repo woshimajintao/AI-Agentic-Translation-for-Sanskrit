@@ -3,7 +3,6 @@ import pandas as pd
 import sys
 from pathlib import Path
 
-# 路径设置
 PROJECT_ROOT = Path(__file__).parent.parent.parent
 sys.path.append(str(PROJECT_ROOT))
 
@@ -12,10 +11,8 @@ from src.db.duckdb_conn import get_db_connection
 st.set_page_config(page_title="Data Resources", layout="wide")
 st.title("📚 Knowledge Base & Resources")
 
-# 获取数据库连接
 con = get_db_connection()
 
-# --- 概览统计 ---
 col1, col2, col3, col4 = st.columns(4)
 with col1:
     count_dict = con.execute("SELECT COUNT(*) FROM mw_lexicon").fetchone()[0]
@@ -32,7 +29,6 @@ with col4:
 
 st.markdown("---")
 
-# --- 详细浏览器 ---
 tab1, tab2, tab3, tab4 = st.tabs(["📖 Dictionary (MW)", "🧬 Grammar (Ambuda)", "🧪 Testsets", "📜 History"])
 
 # === Tab 1: Dictionary ===
@@ -41,7 +37,6 @@ with tab1:
     search_term = st.text_input("Lookup Lemma (e.g., 'dharma', 'agni')", "")
     
     if search_term:
-        # 使用 ILIKE 进行模糊搜索
         df = con.execute("""
             SELECT lemma, gloss, raw_xml 
             FROM mw_lexicon 
@@ -82,7 +77,6 @@ with tab2:
 with tab3:
     st.header("Evaluation Datasets")
     
-    # 列出所有数据集名称
     datasets = con.execute("SELECT DISTINCT dataset_name FROM dataset_items").fetch_df()
     
     if not datasets.empty:
