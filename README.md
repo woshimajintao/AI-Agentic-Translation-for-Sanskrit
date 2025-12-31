@@ -35,6 +35,7 @@ All tool outputs and execution metadata are stored in **DuckDB** to support repr
 
 Our tool demonstration videos are available [here](https://drive.google.com/drive/folders/1EcTHzdfSpEpe64GI08cjwHYctkv1QAOB?usp=sharing):  
 [![Demo Videos](Scripts/ui.png)](https://drive.google.com/drive/folders/1EcTHzdfSpEpe64GI08cjwHYctkv1QAOB?usp=sharing)
+<img width="1438" height="833" alt="Untitled 2" src="https://github.com/user-attachments/assets/31a0c7fc-2186-4ddc-b634-c267b34fb87d" />
 
 
 ---
