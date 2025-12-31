@@ -1,0 +1,1 @@
+A pedagogical dataset designed for Sanskrit learners. It consists of simpler, standard grammatical structures, serving as a baseline to verify fundamental translation accuracy without stylistic complexity
