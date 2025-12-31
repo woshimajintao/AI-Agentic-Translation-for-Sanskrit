@@ -1,30 +1,57 @@
 # Agentic Sanskrit–English Translation 
 
-This repository contains the codebase for an **agentic, tool-augmented Sanskrit–English translation framework** built on a frozen small language model (Qwen2.5-7B).  
-The system improves translation quality **without any training or fine-tuning**, by orchestrating external linguistic tools (dictionary, morphology, glossary, and retrieval) at inference time.
+# Agentic Sanskrit–English Translation (Training-Free)
 
-The project accompanies an academic study on low-resource, morphologically rich language translation, with a focus on **robustness, interpretability, and reproducibility**.
+This repository contains the code for an **agentic, tool-augmented Sanskrit–English translation system** built on a frozen small language model (Qwen2.5-7B).  
+The system improves translation quality **without any training or fine-tuning**, by orchestrating external linguistic tools at inference time.
+
+The implementation accompanies an academic study on low-resource, morphologically rich language translation.
 
 ---
 
-## Key Features
+## Overview
 
-- **Training-free agentic translation**  
-  All experiments are conducted with frozen models; improvements come solely from inference-time orchestration.
+The proposed system follows a **training-free, agentic translation paradigm**:
 
-- **Philologically grounded tools**
-  - Monier–Williams Sanskrit–English dictionary (lexical grounding)
-  - Ambuda-DCS morphological and syntactic analysis
-  - Deterministic glossary constraints for terminology consistency
-  - Optional dynamic top-*k* example retrieval (RAG)
+- **Figure 1** (Pipeline Overview) illustrates the overall architecture, showing how the language model, external tools, and data storage are connected.
+<img width="1512" height="478" alt="d86270bb2608ef32f1b7cfa53504f07d" src="https://github.com/user-attachments/assets/f8241a3b-d89e-4261-a9ee-8a5b2be67a97" />
 
-- **Comprehensive evaluation**
-  - Agentic system ablations (A–I)
-  - General-purpose LLM baselines (GPT series)
-  - Sanskrit-specific MT baselines (M2M100, IndicTrans2)
+- **Figure 2** (Stepwise Orchestration) details the sequential execution flow, from draft generation to evidence-based revision.
+<img width="1472" height="614" alt="00fd99c756fb36ea87c3bf2fdb77c4a3" src="https://github.com/user-attachments/assets/6d24c3ce-feea-41a3-83c7-2f4ed3da6e11" />
 
-- **Leakage-safe experimental design**
-  Strict separation between evaluation data and retrieval pools.
+The agent adopts a *draft → evidence → revision* strategy inspired by human translation practice, enabling explicit linguistic grounding while preserving fluency.
+
+---
+
+## Tool Design
+
+Each external linguistic resource is exposed to the agent as a **callable tool with a fixed input–output interface**:
+
+- **Monier–Williams Dictionary**: provides lexical evidence at the lemma level  
+- **Ambuda-DCS**: returns structured morphological and grammatical tags  
+- **Glossary Constraints**: enforce standardized translations for predefined terms  
+- **Dynamic Top-k Retrieval (optional)**: retrieves similar examples for domain and style conditioning, using a leakage-safe split  
+
+All tool outputs and execution metadata are stored in **DuckDB** to support reproducibility and post-hoc analysis.
+
+---
+
+## Agent Orchestration
+
+As summarized in **Figure 2**, given a Sanskrit input sentence, the agent:
+
+1. Optionally retrieves glossary constraints and similar examples  
+2. Generates an initial draft using a frozen Qwen2.5-7B model  
+3. Invokes morphology (Ambuda) and dictionary (Monier–Williams) tools  
+4. Compresses raw tool outputs into structured linguistic evidence  
+5. Revises the draft under the retrieved evidence and constraints  
+
+This process improves faithfulness and robustness without any parameter updates.
+
+---
+
+## Repository Structure
+
 
 ---
 
