@@ -32,6 +32,10 @@ Each external linguistic resource is exposed to the agent as a **callable tool w
 
 All tool outputs and execution metadata are stored in **DuckDB** to support reproducibility and post-hoc analysis.
 
+Our tool demonstration videos are available here:  
+[![Demo Videos](Scripts/ui.png)](https://drive.google.com/drive/folders/1EcTHzdfSpEpe64GI08cjwHYctkv1QAOB?usp=sharing)
+
+
 ---
 
 ## Agent Orchestration
