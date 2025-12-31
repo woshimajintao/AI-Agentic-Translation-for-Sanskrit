@@ -1,4 +1,7 @@
-Sāmayik: A Benchmark and Dataset for English-Sanskrit Translation
+The datasets were from Sāmayik: A Benchmark and Dataset for English-Sanskrit Translation.
+
+Please put the testsets folder under the data folder.https://github.com/woshimajintao/AI-Agentic-Translation-for-Sanskrit/tree/main/Agentic_system/data
+
 
 https://github.com/ayushbits/Saamayik/tree/master/data
 
