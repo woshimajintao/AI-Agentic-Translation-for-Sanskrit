@@ -1,6 +1,4 @@
-# AI-Agentic-Translation-for-Sanskrit
-
-# Agentic Sanskrit–English Translation (Training-Free)
+# Agentic Sanskrit–English Translation 
 
 This repository contains the codebase for an **agentic, tool-augmented Sanskrit–English translation framework** built on a frozen small language model (Qwen2.5-7B).  
 The system improves translation quality **without any training or fine-tuning**, by orchestrating external linguistic tools (dictionary, morphology, glossary, and retrieval) at inference time.
