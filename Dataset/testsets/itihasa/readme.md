@@ -1,0 +1,1 @@
+A collection of verses from classical Indian epics (Ramayana and Mahabharata). This dataset tests the system's ability to handle archaic vocabulary,complex poetic meter (shlokas), and metaphorical language.
