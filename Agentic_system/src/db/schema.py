@@ -1,33 +1,34 @@
 # src/db/schema.py
 
 INIT_SQL = """
--- 1. 词典表 (Monier-Williams)
--- 使用 FTS (Full Text Search) 索引 gloss 字段以便英文反查，或者仅对 lemma 建索引
+-- 1. Dictionary table (Monier–Williams)
+-- You may add an FTS (Full Text Search) index on the gloss field for English reverse lookup,
+-- or keep indexing only on the lemma field.
 CREATE TABLE IF NOT EXISTS mw_lexicon (
-    lemma VARCHAR,       -- 词头 (如 dharma)
-    gloss VARCHAR,       -- 释义内容
-    raw_xml VARCHAR,     -- 原始 XML (保留格式)
+    lemma VARCHAR,       -- Headword (e.g., dharma)
+    gloss VARCHAR,       -- Definition / gloss text
+    raw_xml VARCHAR,     -- Original XML (preserved formatting)
     source VARCHAR DEFAULT 'MW'
 );
 
--- 2. 词法/语法分析表 (Ambuda)
--- 用于把“变形词”映射回“原形”
+-- 2. Morphological / grammatical analysis table (Ambuda)
+-- Used to map inflected forms back to their base lemma.
 CREATE TABLE IF NOT EXISTS morph_analysis (
-    word VARCHAR,        -- 变形后的词 (如 sPuratu)
-    lemma VARCHAR,       -- 原形 (如 sPur)
-    pos_tag VARCHAR,     -- 词性/语法标记 (pos=v,p=3...)
-    sent_id VARCHAR      -- 来源句 ID
+    word VARCHAR,        -- Inflected form (e.g., sPuratu)
+    lemma VARCHAR,       -- Base form / lemma (e.g., sPur)
+    pos_tag VARCHAR,     -- POS / morphological tags (e.g., pos=v,p=3...)
+    sent_id VARCHAR      -- Source sentence ID
 );
 
--- 3. 数据集表 (MKB Testset)
+-- 3. Dataset table (e.g., MKB Testset)
 CREATE TABLE IF NOT EXISTS dataset_items (
-    dataset_name VARCHAR, -- 'mkb'
+    dataset_name VARCHAR, -- Dataset name (e.g., 'mkb')
     item_id INTEGER,
-    src_text VARCHAR,     -- Sanskrit
-    tgt_text VARCHAR      -- English Reference
+    src_text VARCHAR,     -- Sanskrit source text
+    tgt_text VARCHAR      -- English reference translation
 );
 
--- 4. 运行记录表 (保持不变)
+-- 4. Translation run log table (unchanged)
 CREATE TABLE IF NOT EXISTS translations (
     run_id VARCHAR,
     timestamp TIMESTAMP,
