@@ -1,5 +1,7 @@
 # ambuda-dcs
 
+Please download the zip and Unzip it to the data folder.https://github.com/woshimajintao/AI-Agentic-Translation-for-Sanskrit/tree/main/Agentic_system/data
+
 https://github.com/ambuda-org/dcs/
 
 Sanitized parse data from the **Digital Corpus of Sanskrit (DCS)**, extracted and lightly corrected for use in the [Ambuda](https://ambuda.org) project and downstream Sanskrit NLP.
