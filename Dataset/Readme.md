@@ -1,9 +1,168 @@
-Here we put some dataset for our AI Agent project. They have different formats.
+# Datasets and Linguistic Resources
+
+This directory contains all datasets and external linguistic resources used in our Sanskrit–English translation system.  
+These resources are explicitly **not treated as parallel training data**, but are instead integrated as **symbolic, interpretable evidence** within an agent-based translation framework.
+
+---
+
+## 1. External Linguistic Resources
+
+As described in Section 2.1 of the paper (*External Linguistic Resources*), the agent relies on three complementary types of external resources, each addressing a distinct source of translation error in Sanskrit.
+
+### 1.1 Lexical Resources: Monier–Williams Dictionary
+
+**Directory:** `Monier-Williams Sanskrit-English Dictionary/`
+
+We use the *Monier–Williams Sanskrit–English Dictionary* as a **lexical knowledge base** providing lemma-level definitions rather than sentence-level translations.
+
+- Entries are indexed by **IAST transliteration**.
+- The dictionary is queried using **heuristic stemming** to handle Sanskrit inflectional variation.
+- Retrieved definitions serve as **linguistic evidence** to support semantic disambiguation, not as parallel supervision.
+
+This resource primarily addresses **lexical ambiguity** and **polysemy**, which are common failure modes in large language models when translating morphologically rich languages.
+
+---
+
+### 1.2 Morphological and Grammatical Resources: Ambuda-DCS
+
+**Directory:** `ambuda-dcs/`
+
+We rely on **Ambuda-DCS**, which provides structured morphological annotations derived from classical Sanskrit corpora.
+
+Each entry may include:
+- Lemma
+- Case
+- Gender
+- Number
+- Tense
+- Mood
+- Part-of-speech tags
+
+This resource enables **explicit grammatical reasoning**, allowing the agent to:
+- Recover argument roles (e.g., subject vs. object),
+- Distinguish tense and aspect,
+- Resolve ambiguities caused by surface word order.
+
+Such grammatical distinctions are frequently misinterpreted by LLMs when relying purely on surface text.
+
+---
+
+### 1.3 Terminology Resources: Curated Glossaries
+
+**Directory:** `glossary/`
+
+We integrate curated **domain-specific glossaries** to standardize translations of named entities and technical terms.
+
+Key properties:
+- Glossary entries provide **deterministic, predefined translations**.
+- Unlike probabilistic retrieval, glossary constraints are **strictly enforced** during decoding.
+- This mechanism prevents inconsistent rendering of:
+  - Proper nouns,
+  - Religious terms,
+  - Technical and institutional vocabulary.
+
+Glossaries are especially important in cross-domain evaluation, where terminological consistency is critical.
+
+---
+
+## 2. Test Sets
+
+**Directory:** `testsets/`
+
+To evaluate robustness across **domains, historical periods, and linguistic styles**, we use five distinct Sanskrit–English test datasets.
+
+### 2.1 Itihasa
+
+**Description:**  
+A collection of verses from classical Indian epics, including the *Ramayana* and *Mahabharata*.
+
+**Challenges addressed:**
+- Archaic vocabulary,
+- Complex poetic meter (*ślokas*),
+- Dense metaphorical and symbolic language.
+
+This dataset tests the system’s ability to handle **classical literary Sanskrit**.
+
+---
+
+### 2.2 Bible
+
+**Description:**  
+Sanskrit translations of the New Testament.
+
+**Challenges addressed:**
+- Transliteration of non-Indic proper nouns (e.g., *Abraham*, *Jesus*),
+- Distinct religious and narrative prose style,
+- Cross-cultural semantic transfer.
+
+This dataset evaluates robustness to **foreign named entities and religious discourse**.
+
+---
+
+### 2.3 MKB (Mann Ki Baat)
+
+**Description:**  
+Transcripts of modern radio addresses by the Prime Minister of India.
+
+**Challenges addressed:**
+- Contemporary Sanskrit usage,
+- Socio-political vocabulary,
+- Modern sentence structures and discourse patterns.
+
+This dataset represents **modern, non-classical Sanskrit**.
+
+---
+
+### 2.4 Spoken-Tutorials
+
+**Description:**  
+Technical and instructional content used in educational settings.
+
+**Challenges addressed:**
+- Domain-specific modern terminology,
+- Imperative sentence forms,
+- Procedural and instructional discourse.
+
+This dataset evaluates translation performance in **technical and pedagogical contexts**.
+
+---
+
+### 2.5 Gitasopanam
+
+**Description:**  
+A pedagogical dataset designed for Sanskrit learners.
+
+**Characteristics:**
+- Simpler sentence structures,
+- Standard grammatical forms,
+- Minimal stylistic or poetic complexity.
+
+This dataset serves as a **baseline**, verifying fundamental translation accuracy without stylistic confounders.
+
+---
+
+## 3. Design Philosophy
+
+Across all datasets and resources:
+
+- External resources are treated as **explicit linguistic evidence**, not training data.
+- The system emphasizes **interpretability**, **error attribution**, and **controlled reasoning**.
+- Each resource targets a specific error class:
+  - Lexical ambiguity,
+  - Morphological misanalysis,
+  - Terminological inconsistency.
+
+This modular design enables systematic ablation and error analysis across domains and historical registers.
 
 
-## Writing systems and transliteration
+For different datasets,they have different formats.
 
-This repository ultimately works with **Sanskrit text**, which can appear in several different writing systems or transliteration schemes. In practice you will most often see:
+
+## 4.Writing systems and transliteration
+
+For different datasets,they have different formats.
+
+We ultimately works with **Sanskrit text**, which can appear in several different writing systems or transliteration schemes. In practice you will most often see:
 
 - **Devanagari** (e.g. देवनागरी) – the standard Indic script for Sanskrit
 - **IAST** – a human-readable Latin transliteration with diacritics (ā, ī, ṛ, ś, ṣ, …)
