@@ -1,7 +1,5 @@
 # Agentic Sanskrit–English Translation 
 
-# Agentic Sanskrit–English Translation (Training-Free)
-
 This repository contains the code for an **agentic, tool-augmented Sanskrit–English translation system** built on a frozen small language model (Qwen2.5-7B).  
 The system improves translation quality **without any training or fine-tuning**, by orchestrating external linguistic tools at inference time.
 
