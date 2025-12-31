@@ -29,7 +29,7 @@ Each external linguistic resource is exposed to the agent as a **callable tool w
 - **Monier–Williams Dictionary**: provides lexical evidence at the lemma level  
 - **Ambuda-DCS**: returns structured morphological and grammatical tags  
 - **Glossary Constraints**: enforce standardized translations for predefined terms  
-- **Dynamic Top-k Retrieval (optional)**: retrieves similar examples for domain and style conditioning, using a leakage-safe split  
+- **Dynamic Top-k Retrieval**: retrieves similar examples for domain and style conditioning, using a leakage-safe split  
 
 All tool outputs and execution metadata are stored in **DuckDB** to support reproducibility and post-hoc analysis.
 
