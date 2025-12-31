@@ -170,7 +170,7 @@ We ultimately works with **Sanskrit text**, which can appear in several differen
 
 Understanding the differences between these three is useful when consuming DCS data or integrating it with other Sanskrit resources (dictionaries, corpora, etc.).
 
-### Devanagari
+### 4.1 Devanagari
 
 **Devanagari** is the original script used in most printed Sanskrit texts today.  
 Example:
@@ -185,7 +185,7 @@ Devanagari is excellent for **human reading**, but inconvenient for many NLP tas
 
 For this reason, it is common to convert Devanagari into a Latin scheme such as IAST or SLP1 before processing.
 
-### IAST (International Alphabet of Sanskrit Transliteration)
+### 4.2 IAST (International Alphabet of Sanskrit Transliteration)
 
 **IAST** is a scholarly transliteration system that represents Sanskrit sounds with Latin letters plus diacritics:
 
@@ -206,7 +206,7 @@ IAST is **very readable** and is the standard in academic publications. However:
 
 For this reason, IAST is ideal for **display and human consumption**, but not always the most convenient internal format.
 
-### SLP1 (Sanskrit Library Phonetic basic)
+### 4.3 SLP1 (Sanskrit Library Phonetic basic)
 
 **SLP1** is a transliteration scheme designed to be:
 
@@ -233,7 +233,7 @@ SLP1 is especially convenient because:
 
 In this repository, you may encounter SLP1 when integrating DCS data with external lexicons or when building automated processing pipelines.
 
-### Quick comparison table
+### 4.4 Quick comparison table
 
 The table below shows a **small subset** of common Sanskrit sounds in the three systems.  
 It is not exhaustive, but illustrates the general pattern.
