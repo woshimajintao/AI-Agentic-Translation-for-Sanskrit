@@ -1,3 +1,3 @@
-Don't forget to put your dataset from this folder to here:
+The original datasets are available here:
 
 https://github.com/woshimajintao/AI-Agentic-Translation-for-Sanskrit/tree/main/Dataset
