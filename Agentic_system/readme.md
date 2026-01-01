@@ -48,6 +48,8 @@ The project is organized to separate the UI (Streamlit), Data Layer, and Core Lo
 
 - Git: For cloning the repository
 
+- (Optional) It is better if you also used Mac.
+
 ## 🚀 Quick Start Guide
 
 Download and Open the Agentic_system project folder in VS Code, open the terminal (Ctrl + ~), and follow these steps.
