@@ -1,6 +1,9 @@
 ambuda-dcs
 ==========
 
+Please find the full data here:https://github.com/woshimajintao/AI-Agentic-Translation-for-Sanskrit/tree/main/Agentic_system/data
+
+
 Parse data from the Digital Corpus of Sanskrit, with various small corrections
 applied after the fact.
 
